@@ -11,7 +11,7 @@
 #include "stb_image_write.h"
 
 #include <pthread.h>
-#define THREAD_COUNT 10
+#define THREAD_COUNT 100
 
 //An array of kernel matrices to be used for image convolution.  
 //The indexes of these match the enumeration from the header file. ie. algorithms[BLUR] returns the kernel corresponding to a box blur.
@@ -91,16 +91,6 @@ void *convolute(void *data){
         }
     }
 
-    /*int row,pix,bit,span;
-    span=srcImage->bpp*srcImage->bpp;
-    for (row=0;row<srcImage->height;row++){
-        for (pix=0;pix<srcImage->width;pix++){
-            for (bit=0;bit<srcImage->bpp;bit++){
-                destImage->data[Index(pix,row,srcImage->width,bit,srcImage->bpp)]=getPixelValue(srcImage,pix,row,bit,algorithm);
-            }
-        }
-    }*/
-
     free(threadData);
 }
 
@@ -164,7 +154,6 @@ int main(int argc,char** argv){
 
     free(threadHandles);
 
-    //convolute(&srcImage,&destImage,algorithms[type]);
     stbi_write_png("output.png",destImage.width,destImage.height,destImage.bpp,destImage.data,destImage.bpp*destImage.width);
     stbi_image_free(srcImage.data);
     
