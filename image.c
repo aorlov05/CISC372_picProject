@@ -82,9 +82,10 @@ void *convolute(void *data){
         endRow = srcImage->height;
     }
 
-    for (int row = beginRow; row < endRow; row++) {
-        for (int pix = 0; pix < srcImage->width; pix++) {
-            for (int bit = 0; bit < srcImage->bpp; bit++) {
+    int row, pix, bit;
+    for (row = beginRow; row < endRow; row++) {
+        for (pix = 0; pix < srcImage->width; pix++) {
+            for (bit = 0; bit < srcImage->bpp; bit++) {
                 destImage->data[Index(pix, row, srcImage->width, bit, 
                     srcImage->bpp)] = getPixelValue(srcImage, pix, row, bit, threadData->algorithm);
             }
@@ -138,8 +139,9 @@ int main(int argc,char** argv){
     destImage.width=srcImage.width;
     destImage.data=malloc(sizeof(uint8_t)*destImage.width*destImage.bpp*destImage.height);
 
+    long thread;
     pthread_t *threadHandles = (pthread_t*) malloc(THREAD_COUNT * sizeof(pthread_t));
-    for (long thread = 0; thread < THREAD_COUNT; thread++) {
+    for (thread = 0; thread < THREAD_COUNT; thread++) {
         ThreadData *threadData = (ThreadData*) malloc(sizeof(ThreadData));
         threadData->srcImage = &srcImage;
         threadData->destImage = &destImage;
@@ -148,7 +150,7 @@ int main(int argc,char** argv){
         pthread_create(&threadHandles[thread], NULL, &convolute, (void*) threadData);
     }
 
-    for (long thread = 0; thread < THREAD_COUNT; thread++) {
+    for (thread = 0; thread < THREAD_COUNT; thread++) {
         pthread_join(threadHandles[thread], NULL);
     }
 
