@@ -1,0 +1,9 @@
+Script started on Thu 30 Oct 2025 12:44:30 PM EDT
+]0;aorlov@login01.darwin:~/CISC372_picProject[?1034h[(ea-cisc372-silber:aorlov)@login01.darwin CISC372_picProject]$ ./image pic1.jpg edge
+Took 6 seconds
+]0;aorlov@login01.darwin:~/CISC372_picProject[(ea-cisc372-silber:aorlov)@login01.darwin CISC372_picProject]$ ./image pic1[K[K[K[K[K_openmp.[K pic1.jpg edge
+Took 6 seconds
+]0;aorlov@login01.darwin:~/CISC372_picProject[(ea-cisc372-silber:aorlov)@login01.darwin CISC372_picProject]$ exit
+exit
+
+Script done on Thu 30 Oct 2025 12:44:59 PM EDT
